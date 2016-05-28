@@ -1,0 +1,23 @@
+{% extends 'myapp/common/base.html' %}
+{% block title %}
+home标题
+{% endblock %}
+{% block content %}
+<p>{{ d }}</p>
+    {{ tlist.1 }}--数组取值.n<br />
+    {% for foo in tlist %}
+    {{ foo }}<br>
+    {% endfor %}
+    {{ tdict.name }}--字典取值
+    {% for key,value in tdict.items %}
+    {{ key }}{{ value }}<br>
+        {% if forloop.last %}
+        最后一个键值
+        {% endif %}
+    {% endfor %}
+    <br>
+    获取url{% url 'add2name' 4 5 %}
+
+
+
+{% endblock %}
