@@ -14,9 +14,13 @@ home标题
         {% if forloop.last %}
         最后一个键值
         {% endif %}
+        {% if key == 'name' %}
+        name指示：{{value  }}
+        {% endif %}
     {% endfor %}
     <br>
-    获取url{% url 'add2name' 4 5 %}
+    获取url{% url 'add2name' 4 5 %}<br>
+    获取当前地址{{ request.path }}
 
 
 
