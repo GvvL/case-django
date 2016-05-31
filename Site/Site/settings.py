@@ -1,3 +1,4 @@
+#coding:utf-8
 """
 Django settings for Site project.
 
@@ -30,13 +31,14 @@ DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer
 # Application definition
 
 INSTALLED_APPS = (
-    'django_admin_bootstrapped',
+    # 'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'admin_reorder',
     'myapp',
     'szc'
 )
@@ -49,7 +51,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
+    'django.middleware.locale.LocaleMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder'
 )
 
 ROOT_URLCONF = 'Site.urls'
@@ -91,3 +94,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
+#定义后台模板
+ADMIN_REORDER=('Site',
+               {'app': 'auth', 'label': '管理员', 'models': ('auth.User', 'auth.Group')},
+
+                   # models with custom name
+    {'app': 'szc', 'models': (
+        'szc.SzcOrders',
+        {'model':'szc.SzcOrders','label':'订单列表'},
+        {'model': 'auth.User', 'label': '管理员列表'},
+    ),'label':'订单中心'},
+
+               )

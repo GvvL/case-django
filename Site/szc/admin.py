@@ -2,7 +2,7 @@
 from django.contrib import admin
 from szc.models import *
 from django_admin_bootstrapped.admin.models import SortableInline
-
+import readonly
 # Register your models here.
 
 class OrderDetailLine(admin.TabularInline,SortableInline):
@@ -10,7 +10,7 @@ class OrderDetailLine(admin.TabularInline,SortableInline):
     extra=0
 
 @admin.register(SzcOrders)
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(readonly.MyAdmin):
     inlines = [OrderDetailLine]#内联一对多
     list_per_page = 5#每页显示数量
     list_display = ['id','sn','uname','tel','price','addr','currStatus']#概览显示数量
@@ -18,7 +18,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 @admin.register(SzcOrderDetail)
-class OrderdetailAdmin(admin.ModelAdmin):
+class OrderdetailAdmin(readonly.MyAdmin):
     list_display=['id','title','price','count']
     list_per_page = 10
     fieldsets = [('详情',{'fields':['title','count']}),('价格',{'fields':['price']})]#详情页展示信息
